@@ -1,2 +1,2 @@
 # hexo
-hexo comment
+hexo story的comment
