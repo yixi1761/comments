@@ -17,6 +17,7 @@ node {
 
     stage("通过 SSH 执行命令") {
       sshCommand(remote: remoteConfig, command: 'cd ~/git/comments && git pull coding master && git push github master')
+      sshCommand(remote: remoteConfig, command: 'cd ~/git/wordpress && git pull coding master && git push github master')
       // 本地创建一个 test.sh 脚本，用来发送到远端执行
       // writeFile(file: 'test.sh', text: 'ls')
       // sshCommand(remote: remoteConfig, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done')
