@@ -1,6 +1,7 @@
 def remoteConfig = [:]
 remoteConfig.name = "my-remote-server"
-remoteConfig.host = "45.86.68.100:2222"
+remoteConfig.host = "${REMOTE_HOST}"
+remoteConfig.port = "${$REMOTE_PORT}"
 remoteConfig.allowAnyHosts = true
 
 node {
