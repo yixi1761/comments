@@ -1,6 +1,7 @@
 def remoteConfig = [:]
 remoteConfig.name = "my-remote-server"
 remoteConfig.host = "${REMOTE_HOST}"
+remoteConfig.port = 2222
 // remoteConfig.port = "${REMOTE_PORT}"
 remoteConfig.allowAnyHosts = true
 
