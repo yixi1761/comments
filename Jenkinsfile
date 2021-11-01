@@ -37,8 +37,8 @@ node {
 
           //添加git remote仓库，上面执行后再GitHub添加公钥再执行下面的关联
           //单独建winter仓库和winterpublic仓库，避免git冲突
-          // sh 'git clone git@github.com:yixi1761/comments.git'
-          // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
+          sh 'git clone git@github.com:yixi1761/comments.git'
+          sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
           // sh 'cd comments && git remote -v '
           sh 'cd comments && git pull coding master && git push github master'
           sh 'pwd && ls'
