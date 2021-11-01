@@ -16,6 +16,18 @@ node {
     remoteConfig.user = "${REMOTE_USER_NAME}"
     // SSH 私钥文件地址
     remoteConfig.identityFile = privateKeyFilePath
+    stage("git 检出+推送") {
+      sh 'ls'
+      checkout([
+          $class: 'GitSCM',
+          branches: [[name: GIT_BUILD_REF]],
+          userRemoteConfigs: [[url: GIT_REPO_URL,credentialsId: CREDENTIALS_ID]]
+      ])        
+      script {
+          // 您可以在此执行任意的 groovy 脚本
+          sh "pwd && ls"
+      }
+    }
 
     stage('生成ssh key,用于gitee或者github认证，clone两个仓库，只需执行一次') {
           // sh 'cd ~/.ssh && ls'
