@@ -57,11 +57,11 @@ node {
     stage("使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
-        sh './upx sync /comments/winter /comments/winter -v'
-        sh './upx sync /comments/story /comments/story -v'
-        sh './upx sync /comments/img /comments/img -v'
-        sh './upx sync /comments/avatar /comments/avatar -v'
-        sh './upx sync /comments/JS /comments/JS -v'
+        sh './upx sync ./comments/winter /comments/winter -v'
+        sh './upx sync ./comments/story /comments/story -v'
+        sh './upx sync ./comments/img /comments/img -v'
+        sh './upx sync ./comments/avatar /comments/avatar -v'
+        sh './upx sync ./comments/JS /comments/JS -v'
         sh './upx logout'
     }
     stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
