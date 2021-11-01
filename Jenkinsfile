@@ -65,7 +65,7 @@ node {
         sh './upx logout'
     }
     stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
-        sshCommand(remote: remoteConfig, command: 'cd ~/git/comments && git pull coding master && git push github master')
+        // sshCommand(remote: remoteConfig, command: 'cd ~/git/comments && git pull coding master && git push github master')
         sshCommand(remote: remoteConfig, command: 'cd ~/git/wordpress && git pull coding master && git push github master')
     }
   }
