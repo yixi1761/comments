@@ -57,11 +57,11 @@ node {
     stage("使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
-        sh './upx sync winter /comments/winter' -v
-        sh './upx sync story /comments/story' -v
-        sh './upx sync img /comments/img' -v
-        sh './upx sync avatar /comments/avatar' -v
-        sh './upx sync JS /comments/JS' -v
+        sh './upx sync winter /comments/winter -v'
+        sh './upx sync story /comments/story -v'
+        sh './upx sync img /comments/img -v'
+        sh './upx sync avatar /comments/avatar -v'
+        sh './upx sync JS /comments/JS -v'
         sh './upx logout'
     }
 
