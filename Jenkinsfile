@@ -16,18 +16,18 @@ node {
     remoteConfig.user = "${REMOTE_USER_NAME}"
     // SSH 私钥文件地址
     remoteConfig.identityFile = privateKeyFilePath
-    stage("git 检出+推送") {
-      sh 'ls'
-      checkout([
-          $class: 'GitSCM',
-          branches: [[name: GIT_BUILD_REF]],
-          userRemoteConfigs: [[url: GIT_REPO_URL,credentialsId: CREDENTIALS_ID]]
-      ])        
-      script {
-          // 您可以在此执行任意的 groovy 脚本
-          sh "pwd && ls"
-      }
-    }
+    // stage("git 检出+推送") {
+    //   sh 'ls'
+    //   checkout([
+    //       $class: 'GitSCM',
+    //       branches: [[name: GIT_BUILD_REF]],
+    //       userRemoteConfigs: [[url: GIT_REPO_URL,credentialsId: CREDENTIALS_ID]]
+    //   ])        
+    //   script {
+    //       // 您可以在此执行任意的 groovy 脚本
+    //       sh "pwd && ls"
+    //   }
+    // }
 
     stage('生成ssh key,用于gitee或者github认证，clone仓库，只需执行一次') {
           // sh 'cd ~/.ssh && ls'
@@ -41,7 +41,7 @@ node {
           // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
           // sh 'cd comments && git remote -v '
           sh 'cd comments && git pull coding master && git push github master'
-          // sh 'pwd && ls'
+          sh 'pwd && ls'
     }
     stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
@@ -57,11 +57,11 @@ node {
     stage("使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
-        sh './upx sync winter /comments/winter -v'
-        sh './upx sync story /comments/story -v'
-        sh './upx sync img /comments/img -v'
-        sh './upx sync avatar /comments/avatar -v'
-        sh './upx sync JS /comments/JS -v'
+        sh './upx sync /comments/winter /comments/winter -v'
+        sh './upx sync /comments/story /comments/story -v'
+        sh './upx sync /comments/img /comments/img -v'
+        sh './upx sync /comments/avatar /comments/avatar -v'
+        sh './upx sync /comments/JS /comments/JS -v'
         sh './upx logout'
     }
     stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
