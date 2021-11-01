@@ -29,7 +29,7 @@ node {
       }
     }
 
-    stage('生成ssh key,用于gitee或者github认证，clone两个仓库，只需执行一次') {
+    stage('生成ssh key,用于gitee或者github认证，clone仓库，只需执行一次') {
           // sh 'cd ~/.ssh && ls'
           // sh 'echo "" | ssh-keygen -t rsa -C admin@venuslight.site '
           // sh 'cd ~/.ssh && ls'
@@ -41,9 +41,9 @@ node {
           // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
           // sh 'cd comments && git remote -v '
           sh 'cd comments && git pull coding master && git push github master'
-          sh 'pwd && ls'
+          // sh 'pwd && ls'
     }
-    stage("使用upx登录又拍云，sync方式增量同步指定文件夹") {
+    stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
         // sh 'wget http://collection.b0.upaiyun.com/softwares/upx/upx_0.3.5_linux_x86_64.tar.gz && tar -zxvf upx_0.3.5_linux_x86_64.tar.gz'
         // sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
@@ -64,8 +64,7 @@ node {
         sh './upx sync JS /comments/JS -v'
         sh './upx logout'
     }
-
-    stage("通过 SSH 执行命令") {
+    stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
         sshCommand(remote: remoteConfig, command: 'cd ~/git/comments && git pull coding master && git push github master')
         sshCommand(remote: remoteConfig, command: 'cd ~/git/wordpress && git pull coding master && git push github master')
     }
