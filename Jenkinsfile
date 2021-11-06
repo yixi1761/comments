@@ -40,8 +40,7 @@ node {
           // sh 'git clone git@github.com:yixi1761/comments.git'
           // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
           // sh 'cd comments && git remote -v '
-          sh 'cd comments && git pull coding master && git push github master'
-          sh 'pwd && ls'
+          // sh 'pwd && ls'
     }
     stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
@@ -56,13 +55,14 @@ node {
     }
     stage("comments:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
-        // sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
-        // sh './upx sync ./comments/winter /comments/winter -v'
-        // sh './upx sync ./comments/story /comments/story -v'
-        // sh './upx sync ./comments/img /comments/img -v'
-        // sh './upx sync ./comments/avatar /comments/avatar -v'
-        // sh './upx sync ./comments/JS /comments/JS -v'
-        // sh './upx logout'
+        sh 'cd comments && git pull coding master && git push github master'
+        sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
+        sh './upx sync ./comments/winter /comments/winter -v'
+        sh './upx sync ./comments/story /comments/story -v'
+        sh './upx sync ./comments/img /comments/img -v'
+        sh './upx sync ./comments/avatar /comments/avatar -v'
+        sh './upx sync ./comments/JS /comments/JS -v'
+        sh './upx logout'
     }
     stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
         // sshCommand(remote: remoteConfig, command: 'cd ~/git/comments && git pull coding master && git push github master')
@@ -70,10 +70,10 @@ node {
     }
     stage("wordpress:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
-        sh 'rm wordpress -r'
-        sh 'git clone git@e.coding.net:justap/web/wordpress.git'
-        sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
-        sh 'cd wordpress && git remote -v '
+        // sh 'rm wordpress -r'
+        // sh 'git clone git@e.coding.net:justap/web/wordpress.git'
+        // sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
+        // sh 'cd wordpress && git remote -v '
         sh 'cd wordpress && git pull coding master && git lfs pull coding master && git push github master'
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         sh './upx sync ./wordpress/wp-content/uploads /wordpress/wp-content/uploads -v'
