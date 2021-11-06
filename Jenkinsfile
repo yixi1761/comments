@@ -70,8 +70,9 @@ node {
     }
     stage("wordpress:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
-        sh 'git clone git@github.com:yixi1761/wordpress.git'
-        sh 'cd wordpress && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/wordpress.git'
+        sh 'rm wordpress -r'
+        sh 'git clone git@e.coding.net:justap/web/wordpress.git'
+        sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
         sh 'cd wordpress && git remote -v '
         sh 'cd wordpress && git pull coding master && git lfs pull coding master && git push github master'
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
