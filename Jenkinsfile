@@ -37,14 +37,14 @@ node {
 
           // 添加git remote仓库，上面执行后再GitHub添加公钥再执行下面的关联
           // 单独建winter仓库和winterpublic仓库，避免git冲突
-          sh 'git clone git@github.com:yixi1761/comments.git'
-          sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
-          sh 'cd comments && git remote -v '
-          sh 'pwd && ls'
+          // sh 'git clone git@github.com:yixi1761/comments.git'
+          // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
+          // sh 'cd comments && git remote -v '
+          // sh 'pwd && ls'
     }
     stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
-        // sh 'wget http://collection.b0.upaiyun.com/softwares/upx/upx_0.3.5_linux_x86_64.tar.gz && tar -zxvf upx_0.3.5_linux_x86_64.tar.gz'
+        sh 'wget http://collection.b0.upaiyun.com/softwares/upx/upx_0.3.5_linux_x86_64.tar.gz && tar -zxvf upx_0.3.5_linux_x86_64.tar.gz'
         // sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         // sh './upx put winter /comments/winter'
         // sh './upx put story /comments/story'
@@ -72,9 +72,9 @@ node {
     stage("wordpress:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
         // sh 'rm wordpress -r'
-        // sh 'git clone git@e.coding.net:justap/web/wordpress.git'
-        // sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
-        // sh 'cd wordpress && git remote -v '
+        sh 'git clone git@e.coding.net:justap/web/wordpress.git'
+        sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
+        sh 'cd wordpress && git remote -v '
         sh 'cd wordpress && git pull coding master && git lfs pull coding master && git push github master'
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         sh './upx sync ./wordpress/wp-content/uploads /wordpress/wp-content/uploads -v'
