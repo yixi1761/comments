@@ -16,18 +16,18 @@ node {
     remoteConfig.user = "${REMOTE_USER_NAME}"
     // SSH 私钥文件地址
     remoteConfig.identityFile = privateKeyFilePath
-    stage("git 检出+推送") {
-      sh 'ls'
-      checkout([
-          $class: 'GitSCM',
-          branches: [[name: GIT_BUILD_REF]],
-          userRemoteConfigs: [[url: GIT_REPO_URL,credentialsId: CREDENTIALS_ID]]
-      ])        
-      script {
-          // 您可以在此执行任意的 groovy 脚本
-          sh "pwd && ls"
-      }
-    }
+    // stage("git 检出+推送") {
+    //   sh 'ls'
+    //   checkout([
+    //       $class: 'GitSCM',
+    //       branches: [[name: GIT_BUILD_REF]],
+    //       userRemoteConfigs: [[url: GIT_REPO_URL,credentialsId: CREDENTIALS_ID]]
+    //   ])        
+    //   script {
+    //       // 您可以在此执行任意的 groovy 脚本
+    //       sh "pwd && ls"
+    //   }
+    // }
 
     stage('生成ssh key,用于gitee或者github认证，clone仓库，只需执行一次') {
           // sh 'cd ~/.ssh && ls'
@@ -44,7 +44,7 @@ node {
     }
     stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
-        sh 'wget http://collection.b0.upaiyun.com/softwares/upx/upx_0.3.5_linux_x86_64.tar.gz && tar -zxvf upx_0.3.5_linux_x86_64.tar.gz'
+        // sh 'wget http://collection.b0.upaiyun.com/softwares/upx/upx_0.3.5_linux_x86_64.tar.gz && tar -zxvf upx_0.3.5_linux_x86_64.tar.gz'
         // sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         // sh './upx put winter /comments/winter'
         // sh './upx put story /comments/story'
@@ -55,7 +55,7 @@ node {
     }
     stage("comments:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
-        sh 'ls -lh'
+        // sh 'ls -lh'
         sh 'cd comments && git pull coding master && git push github master'
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         sh './upx sync ./comments/winter /comments/winter -v'
@@ -72,9 +72,9 @@ node {
     stage("wordpress:使用upx登录又拍云，sync方式增量同步指定文件夹") {
         // sync增量同步
         // sh 'rm wordpress -r'
-        sh 'git clone git@e.coding.net:justap/web/wordpress.git'
-        sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
-        sh 'cd wordpress && git remote -v '
+        // sh 'git clone git@e.coding.net:justap/web/wordpress.git'
+        // sh 'cd wordpress && git remote rename origin coding && git remote add github git@github.com:yixi1761/wordpress.git'
+        // sh 'cd wordpress && git remote -v '
         sh 'cd wordpress && git pull coding master && git lfs pull coding master && git push github master'
         sh './upx login wpress some RGhN9k3TN7d3UCjq3IERerLtpOnAZMGA'
         sh './upx sync ./wordpress/wp-content/uploads /wordpress/wp-content/uploads -v'
