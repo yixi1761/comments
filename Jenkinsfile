@@ -35,12 +35,12 @@ node {
           // sh 'cd ~/.ssh && ls'
           // sh 'cat ~/.ssh/id_rsa.pub' 
 
-          //添加git remote仓库，上面执行后再GitHub添加公钥再执行下面的关联
-          //单独建winter仓库和winterpublic仓库，避免git冲突
-          // sh 'git clone git@github.com:yixi1761/comments.git'
-          // sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
-          // sh 'cd comments && git remote -v '
-          // sh 'pwd && ls'
+          // 添加git remote仓库，上面执行后再GitHub添加公钥再执行下面的关联
+          // 单独建winter仓库和winterpublic仓库，避免git冲突
+          sh 'git clone git@github.com:yixi1761/comments.git'
+          sh 'cd comments && git remote rename origin github && git remote add coding git@e.coding.net:justap/web/comments.git'
+          sh 'cd comments && git remote -v '
+          sh 'pwd && ls'
     }
     stage("首次使用，又拍云upx的put方式上传文件夹") {
         // 安装upx,二进制工具直接可用, put只执行一次
