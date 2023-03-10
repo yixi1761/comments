@@ -63,6 +63,7 @@ node {
         sh './upx sync ./comments/img /comments/img -v'
         sh './upx sync ./comments/avatar /comments/avatar -v'
         sh './upx sync ./comments/JS /comments/JS -v'
+        sh './upx sync ./comments /comments -v'
         sh './upx logout'
     }
     stage("通过 SSH 执行命令，在Ethernetserver里面同步") {
