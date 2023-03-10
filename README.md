@@ -1,4 +1,4 @@
 # hexo 
 hexo story的comment
-备用的图床,
+图床sync
 github,,可用
