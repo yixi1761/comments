@@ -1,8 +1,10 @@
 #!/bin/bash
 msg=修改时间:$(date "+%Y-%m-%d,%H:%M")
-echo $msg
-echo "comments ————————————————————— "
-git status
-git add .
+#echo $msg
+#git status
+git lfs track *.jpg *.jpeg *.mov *.png *.gif *.bmp *.webp *.psd *.ico *.mp4 *.zip *.rar *.gz
+git add *
 git commit -m ${msg}
-git push coding master
+git push origin master
+git push github master
+
